@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <PosterBg :poster="posterBg" />
-    <MoviesList :list="moviesList" @change-poster="onChangePoster" />
-    <MoviesPagination
+    <navbar />
+    <notification />
+    <loader />
+    <poster-bg :poster="posterBg" />
+    <movies-list :list="moviesList" @change-poster="onChangePoster" />
+    <movies-pagination
       :current-page="currentPageNum"
       :per-page="moviesPerPage"
       :total="moviesCount"
@@ -12,17 +15,9 @@
 
 <script>
 import { mapGetters } from "vuex";
-import MoviesList from "./components/MoviesList";
-import PosterBg from "./components/PosterBg";
-import MoviesPagination from "./components/MoviesPagination";
 
 export default {
   name: "App",
-  components: {
-    MoviesPagination,
-    PosterBg,
-    MoviesList,
-  },
   data() {
     return {
       posterBg: "",
@@ -50,5 +45,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>

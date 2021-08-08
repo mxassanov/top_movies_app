@@ -1,5 +1,7 @@
 import { createStore } from "vuex";
 import moviesStore from "./modules/movies";
+import loaderStore from "./modules/loader";
+import notificationStore from "./modules/notification";
 
 const store = createStore({
   state: {},
@@ -7,9 +9,9 @@ const store = createStore({
   actions: {},
   modules: {
     moviesStore,
+    loaderStore,
+    notificationStore,
   },
 });
-
-store.dispatch("initMoviesStore");
 
 export default store;

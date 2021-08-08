@@ -39,6 +39,7 @@ export default {
   right: 0;
   z-index: -1;
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
   transition: all 0.2s ease;
 }

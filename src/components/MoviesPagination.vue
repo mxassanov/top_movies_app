@@ -6,7 +6,7 @@
       :records="total"
       :per-page="perPage"
       :options="paginationOptions"
-      @paginate="onPaginate"
+      @paginate="pageChanged"
     />
   </div>
 </template>
@@ -16,7 +16,7 @@ import Pagination from "v-pagination-3";
 import { mapActions } from "vuex";
 
 export default {
-  name: "",
+  name: "MoviesPagination",
   components: {
     Pagination,
   },
@@ -48,15 +48,16 @@ export default {
   watch: {
     "$route.query": {
       handler: "onPageQueryChanged",
+      flush: "post",
       deep: true,
     },
   },
   methods: {
     ...mapActions("moviesStore", ["changeCurrentPage"]),
-    onPaginate(page) {
+    pageChanged(page) {
       this.$router.push({ query: { page } });
     },
-    onPageQueryChanged({ page }) {
+    onPageQueryChanged({ page = 1 }) {
       this.$refs.pagination.setPage(Number(page));
       this.changeCurrentPage(Number(page));
     },
@@ -66,7 +67,7 @@ export default {
 
 <style scoped>
 .movies-pagination {
-  margin-top: 30px;
+  margin-top: auto;
 }
 .movies-pagination::v-deep(.pagination .page-item .page-link) {
   background-color: transparent;

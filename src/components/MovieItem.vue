@@ -8,14 +8,26 @@
       </div>
       <div class="movie-item-controls row no-gutters">
         <div class="col">
-          <button type="button" class="btn btn-outline-light btn-md btn-block">
-            Edit
-          </button>
+          <div class="d-grid gap-2">
+            <button
+              type="button"
+              class="btn btn-outline-light btn-md btn-block"
+              @click="emitShowInfo"
+            >
+              Info
+            </button>
+          </div>
         </div>
         <div class="col">
-          <button type="button" class="btn btn-outline-light btn-md btn-block">
-            Remove
-          </button>
+          <div class="d-grid gap-2">
+            <button
+              type="button"
+              class="btn btn-outline-light btn-md"
+              @click="emitRemoveEvent"
+            >
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -31,11 +43,23 @@ export default {
       required: true,
     },
   },
+  emits: ["removeItem", "showInfo"],
   computed: {
     posterBg() {
       return {
         "background-image": `url(${this.movie.Poster})`,
       };
+    },
+  },
+  methods: {
+    emitRemoveEvent() {
+      this.$emit("removeItem", {
+        id: this.movie.imdbID,
+        title: this.movie.Title,
+      });
+    },
+    emitShowInfo() {
+      this.$emit("showInfo", this.movie.imdbID);
     },
   },
 };
@@ -88,5 +112,9 @@ export default {
 .movie-year {
   font-size: 14px;
   color: #fff;
+}
+
+.movie-item-controls > .col {
+  padding: 0 10px;
 }
 </style>
